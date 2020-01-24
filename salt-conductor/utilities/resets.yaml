@@ -1,0 +1,69 @@
+# ###################################################################
+# THIS FILE IS USED TO RESET PILLAR ON NEW BRANCHES/SALT ENVIRONMENTS
+# THE FORMAT IS YAML WITH THE FOLLOWING SCHEME
+#
+# reset: [required top level]
+#   path_to_pillar_file:
+#     to_level_pillar_item_in_file:
+#       nested_pillar:
+#         nested_pillar:
+#           etc:
+#             - valid to change
+# ##################################################################
+aws.sls:
+  us-east-1:
+    vpc: CHANGE_ME
+    id: CHANGE_ME
+    subnet:
+      public:
+        availability:
+          zone_a: CHANGE_ME
+          zone_b: CHANGE_ME
+          zone_c: CHANGE_ME
+          zone_d: CHANGE_ME
+      private:
+        availability:
+          zone_a: CHANGE_ME
+          zone_b: CHANGE_ME
+          zone_c: CHANGE_ME
+          zone_d: CHANGE_ME
+    key: CHANGE_ME
+    sandbox:
+      id: CHANGE_ME
+      key: CHANGE_ME
+    security-groups:
+      public: CHANGE_ME
+      private: CHANGE_ME
+
+provisioning/cloud/vpc/dte.sls:
+  vpc.dte:
+    cidr: CHANGE_ME
+
+provisioning/cloud/vpc/environment.sls:
+  vpc.dev:
+    cidr: CHANGE_ME
+  vpc.qa:
+    cidr: CHANGE_ME
+  vpc.uat:
+    cidr: CHANGE_ME
+  vpc.prod:
+    cidr: CHANGE_ME
+
+
+# PRODUCT SPECIFIC STUFF HERE
+config/common/apache/default.yaml:
+  cassandra:
+    haha: 
+      foo: wwwwwwwwwww
+    primary:
+      password: CHANGE_ME
+      username: CHANGE_ME
+  kafka:
+    password: CHANGE_ME
+    username: CHANGE_ME
+
+config/metras/core/properties.sls:
+  properties:
+    ftp.username: foo
+    ftp.password: bar
+

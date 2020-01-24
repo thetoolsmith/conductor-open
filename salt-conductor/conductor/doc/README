@@ -1,0 +1,29 @@
+placeholder for documentation of conductor runner
+
+coming soon ......
+
+1. Pull down dist package (recommended method is egg) from github or artifactory. Choose a
+   download location other than the runtime directory of the tool which is /srv/runner. 
+   I.E. users home directory or /opt/ etc...
+2. execute the 'install' method described below for the distribution you downloaded.
+
+# ##############################################################################################
+#
+# dist: conductor-1.0-py2.7.egg (RECOMMENDED METHOD)
+# build: python setup.py bdist_egg
+# install: sudo easy_install -s /srv/runners conductor-1.0-py2.7.egg 
+# comments: This install method will place all modules in the default site-packages for python.
+#           Should be the recommended way to install on non-development systems.
+#           And all required files and scripts will be installed to /srv/runners. 
+#           This is the execution directory of the conductor
+#
+# dist: conductor-1.0.tar.gz
+# build: python setup.py sdist
+# install: sudo tar xf conductor-1.0.tar.gz -C /srv/runners --strip=1
+# comments: This install method puts all modules and files in /srv/runners, so the modules are 
+#           loaded from there. This is the execution directory of the conductor.
+#           Consider this the source distribution to be used on development systems where you 
+#           current directory access to all libs. I.E. the libs will not be installed to system
+#           site-packages location.
+#
+# ##############################################################################################

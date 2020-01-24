@@ -1,0 +1,18 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "salty/zookeeper/version.yaml" as default %}
+
+zookeeper:
+  product-version: {{default['product-version']}}
+  product-name: {{default['product-version'].split('-')[0]}}
+  version: {{default['product-version'].split('-')[1]}}
+  java-version: 1.8.0_181
+  dest-path: /datalake
+  appuser:  centos
+  appgroup: centos
+  srcpath: {{artifactory['repo-path']}}/com/apache/zookeeper/
+  zoofile: "salt://salty/templates/zoo.cfg"
+  env-file-updates:
+    - /home/centos/.bashrc
+    - /home/centos/.bash_profile
+    - /root/.bash_profile
+    - /root/.bashrc

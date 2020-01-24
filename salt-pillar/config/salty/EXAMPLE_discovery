@@ -1,0 +1,66 @@
+THIS FILE IS AN EXAMPLE SHOWING HOW discovery CONFIGURATION CAN BE SET ON ROLES TO LEARN ABOUT OTHER SYSTEMS AT CREATE TIME
+
+
+salty.role
+  kafka:
+    security-group: private
+    zookeeper-host: "1.1.1.1:2181"
+    product-version: 2.11.2
+    discovery:
+      - grain: ipv4
+        responses: 3
+        element: 0
+        filter:
+          role: zookeeper
+          cluster.member.id: "*" 
+          salty.zookeeper.cluster.id: 1
+        local:
+          grain: zookeeper.host
+          prefix:
+          suffix: ":2181"
+          type: string
+      - grain: selinux
+        filter:
+          role: zookeeper
+          cluster.member.id: "*" 
+          salty.zookeeper.cluster.id: 1
+        key: enabled
+        local:
+          grain: zookeeper.selinux.enabled
+          type: dict
+      - grain: fqdn
+        filter: 
+          role: zookeeper
+          salty.zookeeper.cluster.id: 1
+          internal.role: primary
+        local:
+          grain: my.zookeeper.primary
+          type: string
+      - grain: fqdn
+        filter: 
+          role: zookeeper
+          salty.zookeeper.cluster.id: 1
+          internal.role: secondary
+        local:
+          grain: my.zookeeper.secondaries
+          type: string
+      - grain: "systemd:version"
+        filter:
+          role: zookeeper
+          id: "*primary*"
+        local:
+          grain: test.primary.systemd.version
+          type: string
+    hooks:
+      post-startup-orchestration:
+        state: ['orch.salty.post.startup.kafka']
+        enable: False
+      post-upsize-orchestration:
+        state: ['orch.common.post.upsize.kafka']
+        enable: True
+      post-downsize-orchestration:
+        state: ['orch.common.post.downsize.kafka']
+        enable: True
+    state: ['salty.kafka']
+    java:
+      version: 1.8.0_101

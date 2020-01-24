@@ -1,0 +1,10 @@
+{
+  "check": {
+    "id": "disk-util",
+    "name": "Root Disk Utilization Check  ",
+    "notes": "Free Disk Space checker (nagios plugin)  ",
+    "script": "/usr/lib/nagios/plugins/check_disk -w 20% -c 10% /",
+    "interval": "64s",
+    "timeout": "1m"
+  }
+}

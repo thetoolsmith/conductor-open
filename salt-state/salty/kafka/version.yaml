@@ -1,0 +1,1 @@
+product-version: {{ salt['pillar.get']('salty.role:kafka:product-version', '2.11-2.0.0') }}

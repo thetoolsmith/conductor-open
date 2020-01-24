@@ -1,0 +1,14 @@
+[Unit]
+Description=Datalake Rest Api Service
+After=network.target
+
+[Service]
+Type=simple
+User=centos
+Environment=JAVA_HOME=<change_me>
+ExecStart=/datalake/datalakeapi/bin/datalakeapi -Dconfig.file=/datalake/datalakeapi/conf/test.conf -Dplay.http.secret.key=test -Dplay.flters.host.allowed=[localhost] -Dpidfile.path=/dev/null
+Restart=on-abort
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

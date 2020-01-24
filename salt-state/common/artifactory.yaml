@@ -1,0 +1,16 @@
+# FIRST WE LOOK AT ENV specific global.sls, if not found use these defaults
+protocol: {{ salt['pillar.get']('global:artifactory:protocol', 'http') }}
+
+host: {{ salt['pillar.get']('global:artifactory:host', 'artifactory.orgX-override-global.com') }}
+
+port: {{ salt['pillar.get']('global:artifactory:port', '80') }}
+
+user: {{ salt['pillar.get']('global:artifactory:user', 'anonymous') }}
+
+token: {{ salt['pillar.get']('global:artifactory:token', 'None') }}
+
+path: {{ salt['pillar.get']('global:artifactory:path', '/artifactory') }}
+
+repo-path: {{ salt['pillar.get']('global:artifactory:repo-path', '/artifactory/libs-release-local') }}
+
+ 

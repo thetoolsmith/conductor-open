@@ -1,0 +1,14 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/cassandra/version.yaml" as default %}
+
+cassandra:
+  product-version: {{default['version']}}
+  product-name: cassandra
+  java-version: 1.8.0_101
+  srcpath: {{artifactory['repo-path']}}/com/apache/cassandra/
+  dest-path: /opt/apache
+  user: root
+  group: root
+  appuser: centos
+  appgroup: centos
+

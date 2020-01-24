@@ -1,0 +1,8 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+zookeeper:
+  product-version: 3.4.10
+  product-name: zookeeper
+  java-version: 1.8.0_101
+  dest-path: /opt/datalake
+  srcpath: {{artifactory['repo-path']}}/com/apache/zookeeper/
+  zoofile: salt://devops/zookeeper/templates/zoo.cfg

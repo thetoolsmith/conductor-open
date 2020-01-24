@@ -1,0 +1,10 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+alertlogic:
+  agent:
+    product-version: {{ salt['pillar.get']('config.common:alertlogic:agent:version', '2.6.0' ) }}
+    port: {{ salt['pillar.get']('config.common:alertlogic:agent:port', '1514' ) }}
+    key: {{ salt['pillar.get']('config.common:alertlogic:agent:key', 'unspecified' ) }}
+    service-name: al-agent
+    srcpath: {{artifactory['repo-path']}}/com/alertlogic/agent/
+    dest-path: /

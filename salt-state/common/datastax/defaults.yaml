@@ -1,0 +1,9 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+opscenter:
+  product-name: opscenter
+  version: {{ salt['pillar.get']('config.common:datastax:opscenter:version', '6.5.3' ) }}
+  java-version: {{ salt['pillar.get']('config.common:datastax:opscenter:java-version', '1.8.0_181' ) }}
+  service-name: opscenterd
+  srcpath: {{artifactory['repo-path']}}/com/datastax/opscenter/
+  dest-path: /

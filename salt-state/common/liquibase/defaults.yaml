@@ -1,0 +1,8 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+liquibase_core:
+  product-version: {{ salt['pillar.get']('config.common:liquibase-core:version', "3.5.3")}}
+  srcpath: {{artifactory['repo-path']}}/com/liquibase/core/
+
+
+

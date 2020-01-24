@@ -1,0 +1,277 @@
+group-create-ec2-us-east-1-test:
+  - devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com:
+      size: t2.small
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 20, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        post.startup.orchestration: orch.devops.post.nifi
+        foooooo: barrrrr
+        pre.startup.orchestration: orch.devops.pre.nifi
+        zookeeper.cluster.id: 4
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: node
+        cluster.members: ['devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        owner: paulbruno
+        purpose: salt dev testing
+  - devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com:
+      size: t2.small
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 20, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'description': 'test_internal_role_config', 'Name': 'devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 10, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 02
+        role: devops.nifi
+        post.startup.orchestration: orch.devops.post.nifi
+        foooooo: barrrrr
+        pre.startup.orchestration: orch.devops.pre.nifi
+        zookeeper.cluster.id: 4
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: node
+        cluster.members: ['devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        owner: paulbruno
+        purpose: salt dev testing
+  - devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com:
+      size: t2.medium
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 30, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        post.startup.orchestration: orch.devops.post.nifi
+        foooooo: barrrrr
+        pre.startup.orchestration: orch.devops.pre.nifi
+        zookeeper.cluster.id: 4
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: dummy
+        cluster.members: ['devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        owner: paulbruno
+        purpose: salt dev testing
+  - devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com:
+      size: t2.medium
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 30, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'description': 'test_upstream_role_config', 'Name': 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com'}, type: gp2, size: 100, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        post.startup.orchestration: orch.devops.post.nifi
+        foooooo: barrrrr
+        pre.startup.orchestration: orch.devops.pre.nifi
+        zookeeper.cluster.id: 4
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: manager
+        cluster.members: ['devops-nifi-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com', 'devops-nifi-dummy-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifimgr-01.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        owner: paulbruno
+        purpose: salt dev testing
+  - devops-mq01.us-east-1a.test.MYDOMAIN.com:
+      size: t2.small
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      block_device_mappings:
+        - DeviceName: /dev/sda1
+          Ebs.VolumeSize: 10
+          Ebs.VolumeType: gp2
+      volumes:
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.activemq
+        product.group: devops
+        test-grain: foobar
+        foooooo: barrrrr
+        zookeeper.cluster.id: 4
+        yetanother: {'bob': 'employee1', 'sue': 'employee2'}
+        another: ['one', 'two', 'three']
+        pillar.environment: test
+        role.id: devops.activemq
+        node_location: us-east-1a
+      tag:
+        Name: devops-mq01.us-east-1a.test.MYDOMAIN.com
+  - devops-mq02.us-east-1a.test.MYDOMAIN.com:
+      size: t2.small
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      block_device_mappings:
+        - DeviceName: /dev/sda1
+          Ebs.VolumeSize: 10
+          Ebs.VolumeType: gp2
+      volumes:
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 3253451012
+        devops.system.id: 3
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 02
+        role: devops.activemq
+        product.group: devops
+        test-grain: foobar
+        foooooo: barrrrr
+        zookeeper.cluster.id: 4
+        yetanother: {'bob': 'employee1', 'sue': 'employee2'}
+        another: ['one', 'two', 'three']
+        pillar.environment: test
+        role.id: devops.activemq
+        node_location: us-east-1a
+      tag:
+        Name: devops-mq02.us-east-1a.test.MYDOMAIN.com

@@ -1,0 +1,54 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "salty/cassandra/version.yaml" as default %}
+
+cassandra:
+  product-version: {{default['version']}}
+  product-name: cassandra
+  service-name: dse
+  java-version: {{salt['pillar.get']('salty.role:cassandra:java:version', '1.8.0_181') }}
+  srcpath: {{artifactory['repo-path']}}/com/apache/cassandra/
+  dest-path: /datalake
+  user: root
+  group: root
+  appuser: cassandra
+  appgroup: cassandra
+  repo-state: salty.cassandra.repo
+  seed-db: True
+  csql:
+    path: {{artifactory['repo-path']}}/polaris/datalake/cassandra/
+    package: cassandra-setup-datalake.cql
+  env-file-updates:
+    - /home/cassandra/.bashrc
+    - /home/cassandra/.bash_profile
+    - /root/.bashrc
+  home: /etc/dse/cassandra
+  home-parent: /etc/dse
+  additional-packages: ['datastax-agent', 'libaio']
+  directories:
+    cassandra:
+      - /datalake/cassandra/cdc_raw
+      - /datalake/cassandra/hints
+      - /datalake/cassandra/saved_caches
+      - /datalake/cassandra/logs
+      - /datalake/dump/cassandra
+      - /datalake_commitlog/cassandra/commitlog
+      - /mnt/datalake_data/cassandra/data
+    root:
+      - /mnt/datalake_data
+  # EXAMPLE these are defined as overridable via pillar per environment
+  authentication_options:
+    enabled: {{ salt['pillar.get']('salty.role:cassandra:authentication_options:enabled', 'true') }}
+    default_scheme: {{ salt['pillar.get']('salty.role:cassandra:authentication_options:default_scheme', 'internal') }}
+    allow_digest_with_kerberos: {{ salt['pillar.get']('salty.role:cassandra:authentication_options:allow_digest_with_kerberos', 'true') }}
+    plain_text_without_ssl: {{ salt['pillar.get']('salty.role:cassandra:authentication_options:plain_text_without_ssl', 'warn') }}
+    transitional_mode: {{ salt['pillar.get']('salty.role:cassandra:authentication_options:transitional_mode', 'disabled') }}
+
+  authorization_options:
+    enabled: {{ salt['pillar.get']('salty.role:cassandra:authorization_options:enabled', 'true') }}
+    transitional_mode: {{ salt['pillar.get']('salty.role:cassandra:authorization_options:transitional_mode', 'disabled') }}
+    allow_row_level_security: {{ salt['pillar.get']('salty.role:cassandra:authorization_options:allow_row_level_security', 'false') }}
+
+  datastax-agent:
+    api_port: {{ salt['pillar.get']('salty.role:cassandra:datastax-agent::api-port', '5432') }}
+    swagger_enabled: {{ salt['pillar.get']('salty.role:cassandra:datastax-agent::swagger-enabled', '1') }}
+

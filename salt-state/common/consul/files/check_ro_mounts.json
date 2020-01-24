@@ -1,0 +1,9 @@
+{
+  "check": {
+    "id": "ro_mounts",
+    "name": "Check R/O Mounts",
+    "script": "/usr/lib/nagios/plugins/check_ro_mounts",
+    "interval": "30s",
+    "timeout": "10s"
+  }
+}

@@ -1,0 +1,10 @@
+[datastax]
+name = DataStax Repository
+baseurl = https://orgX.com:PASSWORD@rpm.datastax.com/enterprise
+enabled=1
+gpgcheck=0
+[opscenter]
+name = DataStax Repository
+baseurl = https://orgX.com:PASSWORD@rpm.datastax.com/enterprise
+enabled=1
+gpgcheck=0

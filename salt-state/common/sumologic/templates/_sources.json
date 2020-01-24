@@ -1,0 +1,12 @@
+{
+    "api.version":"v1",
+    "sources":[
+       {   
+          "sourceType":"LocalFile",
+          "name":"__NAME__",
+          "timeZone":"Etc/UTC",
+          "pathExpression":"__EXPR_PATH__",
+          "category":"__CATEGORY__"
+       }   
+    ]   
+  }

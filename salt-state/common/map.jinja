@@ -1,0 +1,14 @@
+{% import_yaml "common/defaults.yaml" as d %}
+
+# this next function must be in the map.jinja. if put in defautls.yaml, jinja throws loader exception
+{% do d.artifactory.update({'connector': d.artifactory.protocol + '://' + d.artifactory.user + ':' + d.artifactory.token + '@' + d.artifactory.host + ':' + d.artifactory.port|string }) %}
+
+# merge updated defaults with global pillar
+{% set artifactory = salt['pillar.get'](
+    'global:artifactory',
+    default=d.artifactory,
+    merge=True
+  )
+%}
+{% set common = d %}
+

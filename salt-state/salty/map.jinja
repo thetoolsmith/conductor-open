@@ -1,0 +1,21 @@
+{% import_yaml "salty/zookeeper/defaults.yaml" as zookeeper_defaults %}
+{% import_yaml "salty/kafka/defaults.yaml" as kafka_defaults %}
+{% import_yaml "salty/nifi/defaults.yaml" as nifi_defaults %}
+{% import_yaml "salty/cassandra/defaults.yaml" as cassandra_defaults %}
+{% import_yaml "salty/opscenter/defaults.yaml" as opscenter_defaults %}
+{% import_yaml "salty/datalakeapi/defaults.yaml" as datalakeapi_defaults %}
+
+{% set pgroup = {} %}
+{% set enable_alertlogic = salt['pillar.get']('salty.role:enable-alertlogic', salt['pillar.get']('config.common:alertlogic:enabled', False)) %}
+{% set enable_sumologic = salt['pillar.get']('salty.role:enable-sumologic', salt['pillar.get']('config.common:sumologic:enabled', False)) %}
+{% set enable_datadog = salt['pillar.get']('salty.role:enable-datadog', salt['pillar.get']('config.common:datadog:enabled', False)) %}
+
+{% do pgroup.update({'enable_alertlogic': enable_alertlogic}) %}
+{% do pgroup.update({'enable_sumologic': enable_sumologic}) %}
+{% do pgroup.update({'enable_datadog': enable_datadog}) %}
+{% do pgroup.update({'zookeeper': zookeeper_defaults['zookeeper']}) %}
+{% do pgroup.update({'kafka': kafka_defaults['kafka']}) %}
+{% do pgroup.update({'cassandra': cassandra_defaults['cassandra']}) %}
+{% do pgroup.update({'nifi': nifi_defaults['nifi']}) %}
+{% do pgroup.update({'opscenter': opscenter_defaults['opscenter']}) %}
+{% do pgroup.update({'datalakeapi': datalakeapi_defaults['datalakeapi']}) %}

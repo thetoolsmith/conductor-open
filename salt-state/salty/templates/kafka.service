@@ -1,0 +1,15 @@
+{% from "salty/map.jinja" import pgroup with context %}
+[Unit]
+Description=kafka Service
+After=network.target
+
+[Service]
+Type=simple
+User={{pgroup.kafka['appuser']}}
+LimitNOFILE=16384
+Environment=JAVA_HOME=/opt/java/latest
+ExecStart={{pgroup.kafka['dest-path']}}/kafka/bin/kafka-server-start {{pgroup.kafka['dest-path']}}/kafka/etc/kafka/server.properties
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target

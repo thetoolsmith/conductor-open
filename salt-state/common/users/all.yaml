@@ -1,0 +1,25 @@
+# #########################################################################
+# USER ACCOUNTS TO CREATE ON ALL NEW INSTANCES. 
+# THIS EXAMPLE IS 'IF NOT IN PILLAR USE STATE'. THE LOGIC CAN ALSO BE
+# REVERSED WHERE 'IF NOT IN STATE DEFAULS USE PILLAR'
+# DEPENDS ON THE REQUIREMENT
+# #########################################################################
+
+
+tomcat:
+  uid: {{ salt['pillar.get']('global:users:tomcat:uid', None) }}
+  sshkey: {{ salt['pillar.get']('global:users:tomcat::ssh-key', None) }}
+  fullname: {{ salt['pillar.get']('global:users:tomcat::fullname', 'tomcatuser') }}
+
+other:
+  uid: {{ salt['pillar.get']('global:users:other:uid', None) }}
+  sshkey: {{ salt['pillar.get']('global:users:other::ssh-key', None) }}
+  fullname: {{ salt['pillar.get']('global:users:other::fullname', 'otheruser') }}
+
+# EXAMPLE OF USER USING REVERSE DEFAULT LOGIC
+another:
+  uid: {{ salt['pillar.get']('global:users:another:uid') if (salt['pillar.get']('global:users:other:uid')) else 'another' %}
+  sshkey: {{ salt['pillar.get']('global:users:another:ssh-key') if (salt['pillar.get']('global:users:other:ssh-key')) else 'another' %}
+  fullname: {{ salt['pillar.get']('global:users:another:fullname') if (salt['pillar.get']('global:users:other:fullname')) else 'another' %}
+
+

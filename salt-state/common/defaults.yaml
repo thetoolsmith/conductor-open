@@ -1,0 +1,19 @@
+# #########################################################################
+# DEFAULTS FOR THIRD PARTY APPS
+# PILLAR VALUES ARE EVALUATED  IN THE PRODUCT SPECIFIC DEFAULT.YAML
+# THIS IS A ROLLUP TO EXPOSE ALL DEFAULTS TO STATE FILES WITH ONE INCLUDE
+# ** ALL SUPPORTED VERSIONS NEED TO BE IN GLOBAL.SLS
+# #########################################################################
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/defaults.yaml" as apache %}
+{% import_yaml "common/oracle/defaults.yaml" as oracle %}
+{% import_yaml "common/liquibase/defaults.yaml" as liquibase %}
+{% import_yaml "common/consul/defaults.yaml" as consul %}
+{% import_yaml "common/jq/defaults.yaml" as jq %}
+
+artifactory: {{artifactory}}
+apache: {{apache}}
+oracle: {{oracle}}
+liquibase_core: {{liquibase}}
+consul: {{consul}}
+jq: {{jq}}

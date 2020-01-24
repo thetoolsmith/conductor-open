@@ -1,0 +1,23 @@
+{%- set _env = saltenv -%}
+{%- if 'us-west-1b' in grains['domain'] -%}
+  {%- set _cluster = 'us-west-1b' -%}
+  {%- set consul_datacenter = 'us-west-1b-'+ _env -%}
+{%- elif 'us-east-1b' in grains['domain'] -%}
+  {%- set _cluster = 'us-east-1b' -%}
+  {%- set consul_datacenter = 'us-east-1b-'+ _env -%}
+{%- endif -%}
+{%- set encrypt_key = salt['pillar.get']('consul.common:encrypt-key', None) -%}
+{%- set consul_lan_nodes = salt['pillar.get']('consul_lan_nodes:' + _env + ':' + _cluster, None) -%}
+{%- set consul_wan_nodes = salt['pillar.get']('consul_wan_nodes:' + _env, None) -%}
+{
+  "bootstrap_expect": 3,
+  "server": true,
+  "datacenter": "{{ consul_datacenter }}",
+  "data_dir": "/tmp/consul-server-data",
+  "ui_dir": "/usr/share/consul-server/ui",
+  "encrypt": "{{ encrypt_key }}",
+  "log_level": "INFO",
+  "enable_syslog": true,
+  "retry_join": {{ consul_lan_nodes|json }},
+  "retry_join_wan": {{ consul_wan_nodes|json }}
+}

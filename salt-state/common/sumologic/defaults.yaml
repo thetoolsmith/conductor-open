@@ -1,0 +1,7 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+sumologic:
+  srcpath: {{artifactory['repo-path']}}/com/sumologic/agent
+  dest-path: /opt/Sumo
+  access-id: {{salt['pillar.get']('config.common:sumologic:access-id')}}
+  access-key: {{salt['pillar.get']('config.common:sumologic:access-key')}}

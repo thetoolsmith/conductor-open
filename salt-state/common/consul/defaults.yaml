@@ -1,0 +1,14 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+consul:
+  server:
+    product-version: 1.0.6
+    product-name: consul-server
+    srcpath: {{artifactory['repo-path']}}/com/consul/server/  #not in pillar
+    config-location: /usr/share/consul-server/config
+
+  client:
+    product-version: 1.0.6
+    product-name: consul-client
+    srcpath: {{artifactory['repo-path']}}/com/consul/client/  #not in pillar
+

@@ -1,0 +1,14 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/zookeeper/version.yaml" as default %}
+
+zookeeper:
+  product-version: zookeeper-{{default['version']}}
+  version: {{default['version']}}
+  product-name: zookeeper
+  java-version: 1.7.0
+  service-name: zookeeper
+  srcpath: {{artifactory['repo-path']}}/com/apache/zookeeper/
+  dest-path: /opt/apache
+  zoofile: salt://common/apache/zookeeper/templates/zoo.cfg
+  user: root
+  group: root

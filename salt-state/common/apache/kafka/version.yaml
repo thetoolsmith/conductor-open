@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('config.common:apache:kafka:version', '2.11-2.0.0') }}

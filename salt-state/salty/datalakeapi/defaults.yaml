@@ -1,0 +1,19 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "salty/datalakeapi/version.yaml" as default %}
+
+datalakeapi:
+  product-version: {{default['version']}}
+  product-name: datalakeapi
+  java-version: 1.8.0_181
+  dest-path: /datalake
+  service-name: 
+  srcpath: {{artifactory['path']}}/libs-snapshot-local/com/OrgX/datalake/datalakeapi
+  user: root
+  group: root
+  appuser: centos
+  appgroup: centos
+  env-file-updates:
+    - /home/centos/.bashrc
+    - /home/centos/.bash_profile
+    - /root/.bashrc
+

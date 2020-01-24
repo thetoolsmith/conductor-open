@@ -1,0 +1,43 @@
+# ##############################
+# GENERIC activemq INSTALL STATE
+# ##############################
+
+{% from "common/map.jinja" import common with context %}
+
+{% set product = common.apache.activemq['product-name'] %}
+{% set role = salt['pillar.get']('role', product) %} #role passed in pillar such as role=devops.rabbitmq
+{% set version = salt['pillar.get']('version', common.apache.activemq['product-version']) %}
+{% if version == None %}
+exception_no_version_{{role}}:
+  module.run:
+    - name: test.exception
+    - message: version not found in defaults or pillar for {{role}}
+{% endif %}
+
+{% if common.apache.activemq.srcpath == None %}
+exception_null_srcpath_{{role}}:
+  module.run:
+    - name: test.exception
+    - message: default srcpath not found in defaults for {{role}}
+{% endif %}
+
+{% set supportedversions = salt['pillar.get']('global:' + product + ':supported-versions', {}) %}
+
+{% for k,v in supportedversions.iteritems() %}
+  {% if version == k %}
+    # TODO: need to check the md5 hash value as well
+    {% set thepackage = v['package'] %}
+    {% set uri = 'https://' + common.artifactory.user + ':' + common.artifactory.token + '@' + common.artifactory.host + common.apache.activemq.srcpath + version + '/' + thepackage %}
+
+# PULL FROM ARTIFACTORY
+fetch {{product}} for {{role}}:
+  cmd.run:
+    - name: |
+        curl {{ uri }} -o {{ thepackage }}
+        mkdir -p /opt/activemq
+        tar -zxvf {{ thepackage }} -C /opt/activemq
+        /opt/activemq/apache-{{product}}-{{version}}/bin/activemq start
+    - unless: 
+      - test -d /opt/activemq/apache-{{product}}-{{ version }}
+  {% endif %}
+{% endfor %}

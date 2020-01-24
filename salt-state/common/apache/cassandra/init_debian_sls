@@ -1,0 +1,30 @@
+{% from "common/apache/cassandra/map.jinja" import cassandra with context %}
+
+# ROLE OVERRIDE IS A SIMPLE EXAMPLE. IN THEORY WE SHOULD ALLOW A DICT TO BE PASSED IN TO ALLOW TEAM 
+# IMPLEMENTATION OF COMMON STATES TO OVERRIDE ANY CONFIG ITEM.
+
+{% set role = salt['pillar.get']('role', None) %} #role passed in pillar such as role=devops.rabbitmq
+{% if role == None %}
+  {% set role = cassandra['product-name'] %}
+{% endif %}
+
+retrieve and create {{ cassandra['product-name'] }} key for {{ role }} sources:
+  pkgrepo.managed:
+    - humanname: Cassandra
+    - name: deb http://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
+    - file: /etc/apt/sources.list.d/cassandra.list
+    - keyid: {{ cassandra.keyid }}
+    - keyserver: {{ cassandra.keyserver }}
+
+install {{cassandra['product-name']}} for {{role}}:
+  pkg.installed:
+    - name: {{ cassandra.pkg }}
+    - version: {{ cassandra['product-version'] }}
+
+start {{cassandra['product-name']}} service for {{role}}:
+  service.running:
+    - name: cassandra
+    - enable: True
+
+  {% endif %}
+{% endfor %}

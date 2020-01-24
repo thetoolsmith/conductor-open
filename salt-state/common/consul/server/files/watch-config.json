@@ -1,0 +1,9 @@
+{
+    "watches": [
+        {
+            "type": "keyprefix",
+            "prefix": "config/",
+            "handler": "/etc/XX.d/reconfig-watch.sh 2>&1"
+        }
+    ]
+}

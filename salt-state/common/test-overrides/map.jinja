@@ -1,0 +1,2 @@
+{% import_yaml "common/test-overrides/defaults.yaml" as defaults %}
+{% set test-overrides = salt['pillar.get']('config.common:test-overrides', default=defaults.test-overrides, merge=True) %}

@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('salty.role:cassandra:version', 'dse-6.0.2') }}

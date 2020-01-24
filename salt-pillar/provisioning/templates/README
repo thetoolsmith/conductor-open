@@ -1,0 +1,184 @@
+About provisioning templates and making them available via Top.sls
+
+# ##################################################################################
+# LIST THE REQUIRED CONFIGURATION IN THIS ENVIRONMENT (PILLAR BRANCH)
+# FOR EACH ROLE OR COMPOSITE ROLE THAT IS AVAILABLE
+# MAKE SURE THE PILLAR FILE THAT HOLDS THE ROLE CONFIG DATA IS MAD AVAILABLE
+# IN THE PILLAR ROOT TOP.SLS
+# make changes 
+# ALL COMPOSITE ROLE PROVISIONING CONFIG HERE SHOULD BE PRE-FIXED WITH THE 
+# PRODUCT GROUP THAT IS IS ASSOCIATED WITH.
+# I.E. devops.utility
+# WHERE UTILITY IS THE COMPOSITE ROLE AND IT'S PRODUCT GROUP IS DEVOPS
+#
+# DUE TO SALT BEHAVIOR, IF ANY ROLE REQUIRES A STATE BE IT DEPLOY STATE, ROLE STATE,
+# OR ORCHESTRATION STATE, YOU MUST SPECIFY force-delay-state: True
+# THE REASON IS THAT SALT-CLOUD WILL LOCK THE SALT MINION PROCESS WHEN IT APPLIES
+# A STARTUP STATE EVEN AFTER THE STARTUP STATE HAS COMPLETED, UNTIL THE TOP PARENT
+# PROCESS COMPLETES, WHICH WOULD BE THE CONDUCTOR COMMAND WHEN PROVISIONING.
+# ##################################################################################
+
+REPLACE VALUES IN basename config of provisioning templates
+XX - for indexes
+CLUSTERID - for environment unique clid
+REGION - AWS region
+ENV - pillar environment
+
+
+cluster type role syntax:
+Must have a cluster-config key under the productgroup.role id. 
+
+3 types of internal cluster roles can be configured in cluster-config
+primary
+secondary
+other (can be anyname)
+productgroup.role:
+  ...
+  cluster-config
+    primary:
+      ...
+    secondary:
+      ...
+    other:
+      ...
+
+Under each internal role key, there are a minimum of three keys needed
+basename: xxxxx.REGION.ENV  (domain gets appended by way of other pillar)
+nodes: x (number of instances of that internal role)
+either
+upstream-config: True
+or 
+add all possible keys, that can be directly under the productgroup.role key
+In other words, you could simply put upstream-config: True and use the default settings under the productgroup.role key
+Or leave out upstream-config, or set it to False, and add specific values for that particualr internal role
+
+The following are two real EXAMPLE provision config for the same role (so obviously would not be in the same pillar tree due to duplicate id's)
+The first EXAMPLE 1, shows a configuration where the internal roles are ALL using the default configuration for that cluster role type.
+The second EXAMPLE 2, shows a configuration where one internal role is using its own config and the other internal roles are using the default configuration, via upstream-config: True
+*See additional notes after examples*
+
+EXAMPLE 1
+
+salty.nifi:
+  force-delay-state: True
+  role: salty.nifi
+  cluster: True
+  nodes: 1
+  size: t2.medium
+  ami-override: 
+    us-east-1: ami-4bf3d731
+  ebs-optimized: False
+  persist-volumes: False
+  volume-info:
+    somevolname:
+      device: /dev/xvdf
+      size: 30
+      type: gp2 
+      tags: 
+        description: test_upstream_role_config
+        owner: paul bruno
+        Contact: paul bruno
+        Team: salty
+    othervolname:
+      device: /dev/xvdg
+      size: 10
+      type: gp2 
+      tags:
+        description: test_upstream_role_config
+        owner: paul bruno
+        Contact: paul bruno
+        Team: salty
+  cluster-config:
+    primary:
+      basename: mgr-XX.CLUSTERID.REGION.ENV 
+      upstream-config: True
+      nodes: 1
+    secondary:
+      basename: XX.CLUSTERID.REGION.ENV
+      upstream-config: True
+      nodes: 2
+    dummy:
+      basename: dummy-XX.CLUSTERID.REGION.ENV
+      upstream-config: True
+      nodes: 2
+
+
+ EXAMPLE 2
+
+# BECAUSE WE USE A DEFAULT STARTUP STATE new-instance for all, and we don't want to require
+# each extended product group role to be added to the common.config:all list,
+# we must set startup-override and set the base roles state. Of choose another one entirely, or add the entended role to
+# common.config:all pillar list
+
+salty.nifi-extend:
+  force-delay-state: True
+  startup-override: ['salty.nifi']
+  role: salty.nifi-extend
+  role.base: salty.nifi
+  cluster: True
+  nodes: 1
+  size: t2.medium
+  ami-override: 
+    us-east-1: ami-4bf3d731
+  ebs-optimized: False
+  persist-volumes: False
+  volume-info:
+    somevolname:
+      device: /dev/xvdf
+      size: 30
+      type: gp2 
+      tags: 
+        description: test_upstream_role_config
+        owner: paul bruno
+        Contact: paul bruno
+        Team: salty
+    othervolname:
+      device: /dev/xvdg
+      size: 10
+      type: gp2 
+      tags:
+        description: test_upstream_role_config
+        owner: paul bruno
+        Contact: paul bruno
+        Team: salty
+  cluster-config:
+    primary:
+      basename: mgr-XX.CLUSTERID.REGION.ENV 
+      upstream-config: False
+      nodes: 1
+      size: m4.medium
+      ami-override: 
+        us-east-1: ami-4bf3d731
+      ebs-optimized: False
+      persist-volumes: False
+      volume-info:
+        datavolname:
+          device: /dev/xvdf
+          size: 100
+          type: gp2 
+          tags: 
+            description: test_upstream_role_config
+            owner: paul bruno
+            Contact: paul bruno
+            Team: salty
+    secondary:
+      basename: XX.CLUSTERID.REGION.ENV
+      upstream-config: True
+      nodes: 2
+    dummy:
+      basename: dummy-XX.CLUSTERID.REGION.ENV
+      upstream-config: True
+      nodes: 2
+
+
+
+
+NOTES:
+
+These three keys are not valid when specifying an internal role override config as in primary in EXAMPLE 2. However, adding them will not break anything, they will be ignored:
+role: salty.nifi
+role.base: nifi
+cluster: True
+ 
+EXAMPLE 2 tries to show that any key value can be override. Number of volumes is not restricted, ami-override can be added for multiple aws regions since the conductor supports
+provisioning in any regions defined in pillar. 

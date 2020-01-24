@@ -1,0 +1,7 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+jq:
+  product-version: 1.5-1.el7
+  product-name: jq
+  srcpath: {{artifactory['repo-path']}}/com/jq/
+

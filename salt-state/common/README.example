@@ -1,0 +1,22 @@
+Example
+
+oracle product group does not support role in this example. 
+This is an example of a 3rd party product that we assign a default base role grain "oracle.client" at instance provisioning time.
+
+rabbitmq state uses role and allows role override at the team specific implementation level.
+therfore the rabbitmq state has checks to assure the state is being applied the the correct instance (avoiding mistakes) amoung other things. 
+
+With the oracle states, since we are not allowing role overide, when say TeamX has a need to install this on another instance they are building (something like TeamX.Utility),
+There is no need for TeamX utility.deploy state to specifiy role Teamx.oracle.client role when applying the oracle.client state.
+
+This means that when targeting only to TeamX machines running oracle.client, we would use some other filter to target only those nodes. There are many
+ways to target in salt, the role is more of a methodology rather than something required.
+
+Role is a good thing when more than one team is going to consume a product such as cassandra for example..
+ 
+The primary reason for team specific role is for management. Say TeamX has cassandra and TeamY also has a cassandra implementation in the same environment.
+TeamX wants to remote execute a command on all thier cassandra nodes using salt commands, they can do this by targeting the nodes by grains (in the salt world) and specify
+role=Teamx.cassandra. This way TeamY.cassandra nodes are not touched.
+
+Another good reason for roles is so we can add logic to states to make them "safe".
+If role grain evaluation is part of the state, then it would be safe that someone doesn't mistakenly apply the wrong state to the wrong instance/node.

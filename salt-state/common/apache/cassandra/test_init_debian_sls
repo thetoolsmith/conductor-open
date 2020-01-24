@@ -1,0 +1,64 @@
+# examples of specific logic that can be added to states like exception handling, fetching from artifactory 
+# in the event we don't want new minions reaching out to public distro repos, etc....
+
+{% from "common/map.jinja" import common with context %}
+
+{% set product = 'cassandra' %}
+{% set role = salt['pillar.get']('role', None) %} #role passed in pillar such as role=devops.rabbitmq
+{% if role == None %}
+  {% set role = product %}
+{% endif %}
+
+{% set version = salt['pillar.get']('version', common.apache.cassandra['product-version']) %}
+{% if version == None %}
+exception_no_version_{{product}}:
+  module.run:
+    - name: test.exception
+    - message: version not found in defaults or pillar for {{product}}
+{% endif %}
+
+{% if common.apache.cassandra.srcpath == None %}
+exception_null_srcpath_{{product}}:
+  module.run:
+    - name: test.exception
+    - message: default srcpath not found in defaults for {{product}}
+{% endif %}
+
+{% set supportedversions = salt['pillar.get']('global:apache:' + product + ':supported-versions', {}) %}
+
+{% for k,v in supportedversions.iteritems() %}
+  {% if version == k %}
+    # TODO: need to check the md5 hash value as well
+    {% set thepackage = v['package'] %}
+    {% set uri = 'https://' + common.artifactory.user + ':' + common.artifactory.token + '@' + common.artifactory.host + common.apache.cassandra.srcpath + version + '/' + thepackage %}
+
+
+fetch {{role}}:
+  cmd.run:
+    - name: |
+        echo simulate fetching {{product}} from {{uri}}
+        echo installing and setting up {{product}} 
+
+
+install {{role}}:
+  pkg.installed:
+    - name: {{ cassandra.pkg }}
+
+  service.running:
+    - name: cassandra
+    - enable: True
+    - require:
+      - pkg: cassandra
+
+  pkgrepo.managed:
+    - humanname: Cassandra
+    - name: deb http://www.apache.org/dist/cassandra/debian {{ cassandra.series }} main
+    - file: /etc/apt/sources.list.d/cassandra.list
+    - keyid: {{ cassandra.keyid }}
+    - keyserver: {{ cassandra.keyserver }}
+    - require_in:
+      - pkg: cassandra
+
+
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,6 @@
+Use this directory as a common tore for templated file deployments. 
+productname.service files for example. 
+
+Any file that gets deployed outside an installation package that has variable data to be rendered at deploy state time.
+
+

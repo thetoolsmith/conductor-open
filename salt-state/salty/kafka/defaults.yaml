@@ -1,0 +1,29 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "salty/kafka/version.yaml" as default %}
+
+kafka:
+  product-version: {{default['product-version']}}
+  product-name: {{default['product-version'].split('-')[0]}}
+  version: {{default['product-version'].split('-')[1]}}
+  java-version: 1.8.0_181
+  service-name: kafka
+  dest-path: /datalake
+  srcpath: {{artifactory['repo-path']}}/com/apache/kafka/
+  server-properties:
+    listener: {{ salt['pillar.get']('salty.role:kafka:listener', 'PLAINTEXT') }}
+    listener-port: {{ salt['pillar.get']('salty.role:kafka:listener-port', '9099') }}
+    num-partitions: {{ salt['pillar.get']('salty.role:kafka:num-partitions', '1') }}
+    jmx-port: {{ salt['pillar.get']('salty.role:kafka:jmx-port', '4999') }}
+    delete-topics: True
+    log-dirs:
+      - /datalake_logdir_1/kafka/logdir1
+      - /datalake_logdir_2/kafka/logdir2
+  user: root
+  group: root
+  appuser: kafka
+  appgroup: kafka
+  env-file-updates:
+    - /home/kafka/.bashrc
+    - /home/kafka/.bash_profile
+    - /root/.bash_profile
+    - /root/.bashrc

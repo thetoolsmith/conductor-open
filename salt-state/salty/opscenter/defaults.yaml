@@ -1,0 +1,7 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+opscenter:
+  version: {{ salt['pillar.get']('salty.role:opscenter:version', '6.5.3' ) }}
+  product-name: opscenter
+  dest-path: /opt/datastax
+  srcpath: {{artifactory['repo-path']}}/com/datastax/opscenter/
+  user: {{ salt['pillar.get']('ami-user-map:' + grains['os'], 'ec2-user' ) }} 

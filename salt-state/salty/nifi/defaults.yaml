@@ -1,0 +1,65 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "salty/nifi/version.yaml" as default %}
+
+nifi:
+  product-version: {{default['version']}}
+  product-name: nifi
+  java-version: {{salt['pillar.get']('salty.role:nifi:java:version', '1.8.0_101') }}
+  dest-path: /datalake
+  home: /datalake/nifi/{{default['version']}}
+  service-name: nifi
+  srcpath: {{artifactory['repo-path']}}/com/apache/nifi/
+  sql: {{artifactory['path']}}/datalake/mysql/mysql-connector-java-5.1.45-bin.jar
+  dsbulk-source-path: http://downloads.datastax.com/dsbulk
+  dsbulk-version: 1.2.0
+  protocol-port: 1029
+  socket-port: 9797
+  user: root
+  group: root
+  appuser: nifi
+  appgroup: nifi
+  env-file-updates:
+    - /home/nifi/.bashrc
+    - /home/nifi/.bash_profile
+    - /root/.bashrc
+  nar:
+    flow:
+      location: /artifactory/libs-snapshot-local/com/orgXcorp/datalake/data/flow/processors
+      files:
+        nifi-ExtractKeyValueAttributes-nar-1.4-20180213.164353-15.nar: /ExtractKeyValueAttributes/nifi-ExtractKeyValueAttributes-nar/1.4-SNAPSHOT
+        nifi-ExtractAttributesToJSONContent-nar-1.3-20180213.164353-13.nar: /ExtractAttributesToJSONContent/nifi-ExtractAttributesToJSONContent-nar/1.3-SNAPSHOT
+    other:
+      location: /artifactory/libs-release-local/com/orgXcorp/datalake/data/nars
+      files:
+        nifi-cassandra-nar-{{default['version']}}.nar: /
+  # DISTRO FILE UPDATES
+  properties:
+    nifi.zookeeper.connect.timeout: 30
+    nifi.zookeeper.session.timeout: 30
+    nifi.provenance.repository.indexed.attributes: 
+      - customername
+      - datalakeid
+      - membernumber
+      - programentityid
+      - orgXbatchid
+      - dmiprogramname
+      - yearmonthday
+      - membereligibile
+    nifi.cluster.flow.election.max.wait.time: 30
+    nifi.cluster.flow.election.max.candidates: 2
+    nifi.cluster.is.node: false
+    nifi.cluster.node.protocol.port: 1029
+    nifi.remote.input.socket.port: 9797
+    nifi.database.directory: /nifi_database_repository/{{default['version']}}/database_repository
+    nifi.flowfile.repository.directory: /nifi_flowfile_repository/{{default['version']}}/flowfile_repository
+    nifi.content.repository.directory.default: /nifi_content_repository/{{default['version']}}/content_repository
+    nifi.provenance.repository.directory.default: /nifi_provenance_repository/{{default['version']}}/provenance_repository
+    nifi.remote.input.http.enabled: true
+  bootstrap-conf:
+    # THESE CAN BE megabytes or gigabytes (example 4096m or 12g)
+    Xms: 2048m
+    Xmx: 2048m
+  logback-xml:
+    maxHistory: 5
+  #/etc/security/limits.d/20-nproc.conf replace val for 4096
+  nproc: 10000

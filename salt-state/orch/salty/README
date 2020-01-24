@@ -1,0 +1,4 @@
+the /pre-prov, /pre and /post directories are containers for all role based orchestration
+
+However, the three in this directory can be created from a template when a new product group is added to the model as they are generic in this example.
+

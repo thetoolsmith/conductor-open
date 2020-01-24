@@ -1,0 +1,23 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/nifi/version.yaml" as default %}
+
+nifi:
+  product-version: {{default['version']}}
+  product-name: nifi
+  service-name: nifi
+  java-version: 1.8.0_101
+  srcpath: {{artifactory['repo-path']}}/com/apache/nifi/
+  dest-path: /opt/apache
+  sql:
+  protocol-port: 1029
+  socket-port: 9797
+  user: root
+  group: root
+  appuser: centos
+  appgroup: centos
+  repos:
+    - database_repository
+    - flowfile_repository
+    - content_repository
+    - provenance_repository 
+   

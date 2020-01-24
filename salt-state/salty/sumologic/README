@@ -1,0 +1,10 @@
+This location is for the product specific configuration for the common.sumologic state.
+This location also hold any post install stateup or initialization needed specific ro a product group and product.
+
+The base-config.sls state can be used to configure the credentials and source files for sumologic
+for any service of this product group. 
+It is generic, so if something else is needed, create and use another state.
+
+
+common.sumologic state is a prerequisite for any state here.
+

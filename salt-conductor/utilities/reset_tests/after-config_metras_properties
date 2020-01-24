@@ -1,0 +1,42 @@
+#!yaml|gpg
+
+# ################################################################
+# CONFIGURATION PROPERTIES FOR PRODUCTGROUP COMPONENTS
+# config.properties top level namespace is okay
+# because in pillar top.sls we are targeting by
+# the product.group grain.
+# EXPLAINED: pillar is compiled into a huge python dict at runtime
+# SO AS WITH ALL HASH LIKE DICT, YOU CANNOT HAVE DUPLICATE KEYS
+# THESE PROPERTIES CONFIG CAN BE MAINTAINED CONSISTENT ACROSS 
+# ALL PRODUCT GROUPS AND WE CAN USE config.properties AS THE TOP
+# CONFIG KEY "IF" WE TARGET MINIONS TO GET THIS STATE BY USING 
+# product.group GRAIN OF SOME OTHER UNIQUE TARGET FILTER 
+# ################################################################
+
+config.properties:
+
+  haha:
+    foo: wwwwwwwwwww
+
+  common:
+    db.password: None
+    one.username: None
+    one.password: None
+    some.username: None
+    some.password: None
+
+  # metras.processor-manager SPECIFIC CONFIG PROPERTIES
+  processor-manager:
+    foo: wwwwwwwwwww
+    ftp.host: 0.000.00.000
+    ftp.port: 0000
+    ftp.username: None
+    ftp.password: None
+
+  # metras.core SPECIFIC CONFIG PROPERTIES 
+  core:
+    some.value: None
+    other.core-value: None
+    no-so-secret.username: None
+    really-secret.password: None
+

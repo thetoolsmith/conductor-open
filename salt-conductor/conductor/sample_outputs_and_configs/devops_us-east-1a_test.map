@@ -1,0 +1,321 @@
+devops_16833830331552303186:
+  - devops-nifi-01.clid-1.us-east-1a.test.foobar.com:
+      size: t2.small
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 20, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        role.post.startup.orchestration: ['orch.devops.post.nifi']
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        cloud.nifi.cluster.id: 1
+        role.pre.provision.orchestration: ['orch.devops.pre-prov.nifi']
+        role.pre.startup.orchestration: ['orch.devops.pre.nifi']
+        devops.nifi.cluster.id: 1
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: node
+        cluster.members: ['devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-01.clid-1.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops
+  - devops-nifi-02.clid-1.us-east-1a.test.foobar.com:
+      size: t2.small
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 20, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_internal_role_config', 'Team': 'devops'}, type: gp2, size: 10, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 02
+        role: devops.nifi
+        role.post.startup.orchestration: ['orch.devops.post.nifi']
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        cloud.nifi.cluster.id: 1
+        role.pre.provision.orchestration: ['orch.devops.pre-prov.nifi']
+        role.pre.startup.orchestration: ['orch.devops.pre.nifi']
+        devops.nifi.cluster.id: 1
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: node
+        cluster.members: ['devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-02.clid-1.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops
+  - devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com:
+      size: t2.medium
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 30, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'Name': 'devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        role.post.startup.orchestration: ['orch.devops.post.nifi']
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        cloud.nifi.cluster.id: 1
+        role.pre.provision.orchestration: ['orch.devops.pre-prov.nifi']
+        role.pre.startup.orchestration: ['orch.devops.pre.nifi']
+        devops.nifi.cluster.id: 1
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: dummy
+        cluster.members: ['devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops
+  - devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com:
+      size: t2.medium
+      image: ami-4bf3d731
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+        - { device: /dev/xvdf, tags: {'owner': 'paul bruno', 'Name': 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 30, }
+        - { device: /dev/xvdh, tags: {'owner': 'paul bruno', 'Name': 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdj, tags: {'owner': 'paul bruno', 'Name': 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdi, tags: {'owner': 'paul bruno', 'Name': 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+        - { device: /dev/xvdg, tags: {'owner': 'paul bruno', 'Name': 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'Contact': 'paul bruno', 'description': 'test_upstream_role_config', 'Team': 'devops'}, type: gp2, size: 100, }
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.nifi
+        role.post.startup.orchestration: ['orch.devops.post.nifi']
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        cloud.nifi.cluster.id: 1
+        role.pre.provision.orchestration: ['orch.devops.pre-prov.nifi']
+        role.pre.startup.orchestration: ['orch.devops.pre.nifi']
+        devops.nifi.cluster.id: 1
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        product.group: devops
+        pillar.environment: test
+        role.id: devops.nifi
+        role.base: nifi
+        internal.role: manager
+        cluster.members: ['devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-02.clid-1.us-east-1a.test.foobar.com', 'devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com', 'devops-nifi-01.clid-1.us-east-1a.test.foobar.com']
+        cluster.location: us-east-1a
+        node_location: us-east-1a
+      tag:
+        Name: devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops
+  - devops-mq01.us-east-1a.test.foobar.com:
+      size: t2.small
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      block_device_mappings:
+        - DeviceName: /dev/sda1
+          Ebs.VolumeSize: 10
+          Ebs.VolumeType: gp2
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 01
+        role: devops.activemq
+        product.group: devops
+        test-grain: foobar
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        yetanother: {'bob': 'employee1', 'sue': 'employee2'}
+        another: ['one', 'two', 'three']
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        pillar.environment: test
+        role.id: devops.activemq
+        node_location: us-east-1a
+      tag:
+        Name: devops-mq01.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops
+  - devops-mq02.us-east-1a.test.foobar.com:
+      size: t2.small
+      ebs_optimized: False
+      network_interfaces:
+        - DeviceIndex: 0
+          SubnetId: subnet-086c7450
+          SecurityGroupId:
+            - sg-824967f4
+          allocate_new_eip: False
+          AssociatePublicIpAddress: False
+      block_device_mappings:
+        - DeviceName: /dev/sda1
+          Ebs.VolumeSize: 10
+          Ebs.VolumeType: gp2
+      del_all_vols_on_destroy: True
+      del_root_vol_on_destroy: True
+      volumes:
+      minion:
+        environment: test
+        master: 10.123.20.125
+        pillarenv: test
+        startup_states: sls
+        sls_list:
+          - force-delay-state
+      grains:
+        cpid: 16833830331552303186
+        devops.system.id: 1
+        devops.system.name: small_test
+        cloud.system.id: 1
+        node.index: 02
+        role: devops.activemq
+        product.group: devops
+        test-grain: foobar
+        group.post.startup.orchestration: ['orch.devops.post-startup']
+        yetanother: {'bob': 'employee1', 'sue': 'employee2'}
+        another: ['one', 'two', 'three']
+        group.pre.provision.orchestration: ['orch.devops.pre-provision']
+        common.post.startup.orchestration: ['orch.common.post-startup']
+        group.pre.startup.orchestration: ['orch.devops.pre-startup']
+        pillar.environment: test
+        role.id: devops.activemq
+        node_location: us-east-1a
+      tag:
+        Name: devops-mq02.us-east-1a.test.foobar.com
+        owner: paulbruno
+        Contact: paul bruno
+        purpose: salt dev testing
+        Team: devops

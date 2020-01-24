@@ -1,0 +1,4 @@
+This is the directory for custom execution salt modules.
+
+The few here are examples from previous implementation. can be used as refernece on how to wire up calls to executions modules from salt states
+

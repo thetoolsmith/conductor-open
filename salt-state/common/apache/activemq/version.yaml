@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('config.common:apache:activemq:version', '5.15.3') }}

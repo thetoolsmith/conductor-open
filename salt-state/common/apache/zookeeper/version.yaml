@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('config.common:apache:zookeeper:version', '3.5.2-alpha') }}

@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('config.common:apache:nifi:version', '1.5.0') }}

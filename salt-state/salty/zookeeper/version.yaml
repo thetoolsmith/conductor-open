@@ -1,0 +1,1 @@
+product-version: {{ salt['pillar.get']('salty.role:zookeeper:product-version', 'zookeeper-3.4.10') }}

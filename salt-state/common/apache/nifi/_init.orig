@@ -1,0 +1,58 @@
+{% from "common/map.jinja" import common with context %}
+{% from "common/apache/nifi/map.jinja" import nifi with context %}
+
+{% set role = salt['pillar.get']('role', None) %}
+{% if role == None %}
+  {% set role = nifi['product-name'] %}
+{% endif %}
+{% set sql = salt['pillar.get']('sql', nifi['sql']) %}
+{% set version = salt['pillar.get']('version', nifi['product-version']) %}
+{% if version == None %}
+exception_no_version_{{product}}:
+  module.run:
+    - name: test.exception
+    - message: version not found in defaults or pillar for {{role}}
+{% endif %}
+{% if nifi['srcpath'] == None %}
+exception_null_srcpath_{{product}}:
+  module.run:
+    - name: test.exception
+    - message: default srcpath not found in defaults for {{role}}
+{% endif %}
+{% set supportedversions = salt['pillar.get']('global:apache:' + nifi['product-name'] + ':supported-versions', {}) %}
+{% for k,v in supportedversions.iteritems() %}
+  {% if version == k %}
+fetch {{nifi['product-name']}} for {{role}}:
+  cmd.run:
+    - output_loglevel: quiet
+    - name: |
+        mkdir -p {{nifi['destpath']}}
+        curl {{common.artifactory.connector }}{{nifi['srcpath']}}{{version}}/{{v['package']}} -o {{nifi['destpath']}}{{v['package']}}
+        tar zxf {{nifi['destpath']}}{{v['package']}} -C {{nifi['destpath']}}
+        rm -rf {{nifi['destpath']}}{{v['package']}}
+        mkdir {{nifi['destpath']}}resources
+
+    {% if not sql == None %}  
+fetch sql for {{role}}:
+  cmd.run:
+    - output_loglevel: quiet
+    - cwd: {{nifi['destpath']}}resources
+    - name: |
+        curl {{common.artifactory.connector}}{{sql}} -O
+    {% endif %}
+
+
+# NEED TO CREATE A CONFIG FILE WITH ZOOKEPER ENDPOINTS
+# USE GRAINS productgroup.zookeeper.cluster.id
+# IF NOT FOUND USE cloud.zookeeper.cluster.id, productgroup= and role=productgroup.zookeeper to discover zookeeper endpoints
+# ASSUMES THAT IF PROVISIONED AS A NEW CLUSTER ROLE, PASSED IN zookeeper.cluster.id
+# ASSUMES THAT IF PROVISIONED AS PART OF A SYSTEM, the zookeeper would have the same cloud.system.id 
+
+
+start {{role}} service:
+  cmd.run:
+    - name: |
+        echo here we would start {{nifi['service-name']}}...
+
+  {% endif %}
+{% endfor %}

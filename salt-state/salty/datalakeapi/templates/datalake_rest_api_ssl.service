@@ -1,0 +1,14 @@
+[Unit]
+Description=Datalake Rest Api Service
+After=network.target
+
+[Service]
+Type=simple
+User=centos
+Environment=JAVA_HOME=/opt/java/latest
+ExecStart=/datalake/datalakeapi/bin/datalakeapi -Dhttps.port=9443 -Dhttp.port=disabled -Djdk.tls.ephemeralDHKeySize=2048 -Djdk.tls.rejectClientInitiatedRenegotiation=true -Djavax.net.ssl.trustStore=/datalake/.polaris/aabddejj/cassandra.truststore.jks -Djavax.net.ssl.trustStorePassword=__TRUSTSTORE_PASSWORD__ -Djavax.net.ssl.keyStore=/datalake/.polaris/aabddejj/cassandra.keystore.jks -Djavax.net.ssl.keyStorePassword=__KEYSTORE_PASSWORD__
+Restart=on-abort
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

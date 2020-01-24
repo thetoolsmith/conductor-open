@@ -1,0 +1,131 @@
+saltmaster:
+    ----------
+    cloud.nifi.cluster.id:
+    cloud.system.id:
+    cpid:
+    devops.nifi.cluster.id:
+    devops.system.id:
+devops-nifi-dummy-01.clid-2.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        2
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+        2
+    devops.system.id:
+        1
+devops-nifimgr-01.clid-2.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        2
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+        2
+    devops.system.id:
+        1
+devops-nifimgr-01.clid-1.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        1
+    cloud.system.id:
+    cpid:
+        10322837175166970372
+    devops.nifi.cluster.id:
+        1
+    devops.system.id:
+devops-nifi-02.clid-2.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        2
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+        2
+    devops.system.id:
+        1
+devops-mq04.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+    devops.system.id:
+        1
+devops-mq03.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+    devops.system.id:
+        1
+devops-nifi-dummy-01.clid-1.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        1
+    cloud.system.id:
+    cpid:
+        10322837175166970372
+    devops.nifi.cluster.id:
+        1
+    devops.system.id:
+devops-nifi-01.clid-1.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        1
+    cloud.system.id:
+    cpid:
+        10322837175166970372
+    devops.nifi.cluster.id:
+        1
+    devops.system.id:
+devops-mq02.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+    cloud.system.id:
+    cpid:
+        7745384835366066684
+    devops.nifi.cluster.id:
+    devops.system.id:
+devops-mq01.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+    cloud.system.id:
+    cpid:
+        7745384835366066684
+    devops.nifi.cluster.id:
+    devops.system.id:
+devops-nifi-02.clid-1.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        1
+    cloud.system.id:
+    cpid:
+        10322837175166970372
+    devops.nifi.cluster.id:
+        1
+    devops.system.id:
+devops-nifi-01.clid-2.us-east-1a.test.foobar.com:
+    ----------
+    cloud.nifi.cluster.id:
+        2
+    cloud.system.id:
+        1
+    cpid:
+        10442218555605964055
+    devops.nifi.cluster.id:
+        2
+    devops.system.id:
+        1

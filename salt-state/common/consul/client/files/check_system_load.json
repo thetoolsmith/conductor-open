@@ -1,0 +1,9 @@
+{
+  "check": {
+    "id": "system-load",
+    "name": "Server Load Capacity",
+    "script": "/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20",
+    "interval": "10s",
+    "timeout": "1s"
+  }
+}

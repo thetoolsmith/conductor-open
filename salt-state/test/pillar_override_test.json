@@ -1,0 +1,28 @@
+{
+  "salty.role:kafka:discovery": [
+    {
+      "filter": {
+        "salty.zookeeper.cluster.id": 4,
+        "role": "zookeeper"
+      },
+      "local": {
+        "grain": "zookeeper.hostname",
+        "type": "list"
+      },
+      "grain": "id"
+    },
+    {
+      "filter": {
+        "salty.zookeeper.cluster.id": 4,
+        "role": "zookeeper"
+      },
+      "local": {
+        "grain": "zookeeper.host",
+        "type": "list",
+        "suffix": ":2181"
+      },
+      "grain": "ipv4",
+      "element": "0"
+    }
+  ]
+}

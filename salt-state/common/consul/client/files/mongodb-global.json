@@ -1,0 +1,12 @@
+{
+  "service": {
+    "name": "{{ pillar['config.common']['consul.mongodb']['name'] }}",
+    "tags": {{ pillar['config.common']['consul.mongodb']['tags']|json }},
+    "port": {{ pillar['config.common']['consul.mongodb']['port'] }},
+    "check": {
+      "name": "status",
+      "script": "/etc/ne.d/mongodb-check.sh {{ pillar['config.common']['consul.mongodb']['name'] }} localhost:{{ pillar['config.common']['consul.mongodb']['port'] }}/{{ pillar['config.common']['consul.mongodb']['db'] }} {{ pillar['config.common']['consul.mongodb']['username'] }} {{ pillar['config.common']['consul.mongodb']['password'] }}",
+      "interval": "30s"
+    }
+  }
+}

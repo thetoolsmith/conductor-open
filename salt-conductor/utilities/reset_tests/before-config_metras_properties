@@ -1,0 +1,93 @@
+#!yaml|gpg
+
+# ################################################################
+# CONFIGURATION PROPERTIES FOR PRODUCTGROUP COMPONENTS
+# config.properties top level namespace is okay
+# because in pillar top.sls we are targeting by
+# the product.group grain.
+# EXPLAINED: pillar is compiled into a huge python dict at runtime
+# SO AS WITH ALL HASH LIKE DICT, YOU CANNOT HAVE DUPLICATE KEYS
+# THESE PROPERTIES CONFIG CAN BE MAINTAINED CONSISTENT ACROSS 
+# ALL PRODUCT GROUPS AND WE CAN USE config.properties AS THE TOP
+# CONFIG KEY "IF" WE TARGET MINIONS TO GET THIS STATE BY USING 
+# product.group GRAIN OF SOME OTHER UNIQUE TARGET FILTER 
+# ################################################################
+
+config.properties:
+
+  haha:
+    foo: blabla
+
+  # COMMON TO ALL METRAS PRODUCT GROUP PRODUCTS
+  common:
+    db.password: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v2.0.22 (GNU/Linux)
+
+      hIwDC7/huKPA5sUBBACmS6Ha5kan11866tZ45bU8XN6w++iRnENsC0GhCttVOtRV
+      a+urTlRNtv4SgHmnU53N3VNyj5T1TPv4GO8723+0Op0ICJjcfF987RSKvBiBIkD1
+      kdpIqBOvzFb58PGpbpE4qXA1/UfCt9bLuE4SfD3XQtcaw5r3Mj75DnUAe9P2KtJG
+      AZy69w4gTAgdxhvq0ywvCNJmRJAR9Rtg6X5G4P9PX2A2isJGEq5e1tNC237VfvcA
+      pFkt/mebkP+pEzmibrh+HvQNLSUXOA==
+      =wxMF
+      -----END PGP MESSAGE-----
+    one.username: balalalal
+    one.password: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v2.0.22 (GNU/Linux)
+
+      hIwDC7/huKPA5sUBBACoPXP3cIG59+Jy2n5r+j/9Ajh6mvtzRWVhzImgrRqeNJIX
+      9WO6GeQAZfQbmwWsLmzJBoS3zLVjBM2UNpFA3OqxgV1bfPRNGOPlAcXeHtNCBA0y
+      mTHR9yebAU76HNu/bIwRKETKdXzHYU4RMQlrjvXtaD3x0PYv5Jp5tjERm1QS4dJD
+      Af+0G/IuqJeHT5LFubDcRW70qYc0xkZM5qJIVWw8FicPEaFrRtXFPUn+UpHhlq4y
+      oycPdRTK262AntYSg2iuOz6tEg==
+      =k6WE
+      -----END PGP MESSAGE-----
+    some.username: someuser
+    some.password: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v2.0.22 (GNU/Linux)
+
+      hIwDC7/huKPA5sUBBACQmg4Kp9PePa39YWh/LM+wYIgtZ4gnlwwZaWkPhVOGyLIF
+      kyVkFxcJnYEpRM6vS/4X0EaOJaHeAKHCS9Z2PQLygp9RfyCPR2QEfuZeWf91icfx
+      WEVHsL8DE+CG2k3OvDUfXX3KZ8ZEGO/kJueTQDtj4yRljF2bAMdDfVYbF0qqLtJK
+      AShBQYbgmOu3SkextKUUlDsMeiZumEaIsM8lrVmBu1vt/8amj1NxKwdt60t0Ecrq
+      meeM7RfmfA8jo21+lFkj5iK53cw5uuvMTkU=
+      =JcQY
+      -----END PGP MESSAGE-----
+
+  # metras.processor-manager SPECIFIC CONFIG PROPERTIES
+  processor-manager:
+    foo: barrrrrr
+    ftp.host: 11.11.111.10
+    ftp.port: 7777
+    ftp.username: pmuser
+    ftp.password: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v2.0.22 (GNU/Linux)
+
+      hIwDC7/huKPA5sUBA/98ERbV90B7TJUtGWtTTJ02wKA+V277C9C03pVQ+7GhZ5hg
+      h5O9uTWzoIec1HgRjYJ3p6aE4SapzoHIPf2pVCu9nxHuGdWk2QwRIfJiA3b5Ovzl
+      OiM2ACFuEUkcurDEmEwJTJAuZwK3f6/fXP/hs3JQDr7oiz8tT01T5pOnPJIvtdJR
+      ARoRXAXmM70S+gOmf/qTjtR1IH9Qes+YwrMOt+MbQ1nvvE3EaphJXGV0uBsRJMIg
+      G42ainztH8jcR4Rt4facKUutjwq53oIBpoDlHNKt6qyI
+      =W/up
+      -----END PGP MESSAGE-----
+
+  # metras.core SPECIFIC CONFIG PROPERTIES
+  core:
+    some.value: fooooo
+    other.core-value: what
+    no-so-secret.username: me
+    really-secret.password: |
+      -----BEGIN PGP MESSAGE-----
+      Version: GnuPG v2.0.22 (GNU/Linux)
+
+      hIwDC7/huKPA5sUBA/98ERbV90B7TJUtGWtTTJ02wKA+V277C9C03pVQ+7GhZ5hg
+      h5O9uTWzoIec1HgRjYJ3p6aE4SapzoHIPf2pVCu9nxHuGdWk2QwRIfJiA3b5Ovzl
+      OiM2ACFuEUkcurDEmEwJTJAuZwK3f6/fXP/hs3JQDr7oiz8tT01T5pOnPJIvtdJR
+      ARoRXAXmM70S+gOmf/qTjtR1IH9Qes+YwrMOt+MbQ1nvvE3EaphJXGV0uBsRJMIg
+      G42ainztH8jcR4Rt4facKUutjwq53oIBpoDlHNKt6qyI
+      =W/up
+      -----END PGP MESSAGE-----
+

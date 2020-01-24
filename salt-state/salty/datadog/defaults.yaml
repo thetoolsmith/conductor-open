@@ -1,0 +1,8 @@
+# PRODUCT GROUP SPECIFIC CONFIG
+datadog:
+  user: {{ salt['pillar.get']('ami-user-map:' + grains['os'], 'centos' ) }}
+  service-name: datadog-agent 
+  env-file-updates:
+    - /home/__USER__/.bashrc
+    - /home/__USER__/.bash_profile
+    - /root/.bashrc

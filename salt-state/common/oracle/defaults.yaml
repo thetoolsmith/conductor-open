@@ -1,0 +1,19 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% set productsuite = 'config.common:oracle:' %}
+
+java:
+  product-version: {{ salt['pillar.get'](productsuite + 'java:version', '1.7.0')}}
+  srcpath: {{artifactory['repo-path']}}/com/oracle/jdk/
+
+xe:
+  product-version: {{ salt['pillar.get'](productsuite + 'xe:version', '11.2.0-1.0')}}
+  srcpath: {{artifactory['repo-path']}}/com/oracle/xe/
+  http_port: {{ salt['pillar.get'](productsuite + 'xe:http_port', '8080')}}
+  listener_port: {{ salt['pillar.get'](productsuite + 'xe:listener_port', '1521')}}
+  enable_db: {{ salt['pillar.get'](productsuite + 'xe:enable_db', 'y')}}
+  password: {{ salt['pillar.get'](productsuite + 'xe:password', 'changeme')}}
+
+client:
+  product-version: {{ salt['pillar.get'](productsuite + 'client:version', '11.2.0.4.0-1')}}
+  srcpath: {{artifactory['repo-path']}}/com/oracle/client/
+

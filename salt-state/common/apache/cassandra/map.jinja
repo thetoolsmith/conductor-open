@@ -1,0 +1,13 @@
+{% import_yaml "common/apache/cassandra/defaults.yaml" as defaults %}
+
+# LOAD DEFAULTS, ADD SUPPORTED OS_FAMILY, THEN MERGE WITL PILLAR. PILLAR WINS SINCE ENV DELTAS ARE IMPLEMENTED THERE. 
+
+{% set os_family_map = salt['grains.filter_by']({
+    'Centos': {
+      'pkg': 'cassandra',
+    },
+  }, grain="os_family", merge=salt['pillar.get']('config.common:apache:cassandra'))
+%}
+{% do defaults.cassandra.update(os_family_map) %}
+
+{% set cassandra = salt['pillar.get']('config.common:apache:cassandra', default=defaults.cassandra, merge=True) %}

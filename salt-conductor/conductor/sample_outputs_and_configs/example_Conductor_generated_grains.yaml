@@ -1,0 +1,312 @@
+devops-nifi-03.SYSTEMID.us-east-1a.test.MYDOMAIN.com:
+    ----------
+    SSDs:
+        - xvda
+        - xvdf
+        - xvdg
+        - xvdh
+        - xvdi
+        - xvdj
+    biosreleasedate:
+        08/24/2006
+    biosversion:
+        4.2.amazon
+    cloud.nifi.cluster.id:
+        1
+    cluster.location:
+        us-east-1a
+    cluster.members:
+        - devops-nifimgr-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        - devops-nifi-dummy-02.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        - devops-nifi-04.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+        - devops-nifi-03.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+    cluster.members.ip:
+        - 10.123.20.247
+        - 10.123.20.76
+        - 10.123.20.228
+        - 10.123.20.250
+    common.post.startup.orchestration:
+        - orch.common.post-startup
+    cpid:
+        809283538
+    cpu_flags:
+        - fpu
+        - vme
+        - de
+        - pse
+        - tsc
+        - msr
+        - pae
+        - mce
+        - cx8
+        - apic
+        - sep
+        - mtrr
+        - pge
+        - mca
+        - cmov
+        - pat
+        - pse36
+        - clflush
+        - mmx
+        - fxsr
+        - sse
+        - sse2
+        - ht
+        - syscall
+        - nx
+        - rdtscp
+        - lm
+        - constant_tsc
+        - rep_good
+        - nopl
+        - xtopology
+        - eagerfpu
+        - pni
+        - pclmulqdq
+        - ssse3
+        - fma
+        - cx16
+        - pcid
+        - sse4_1
+        - sse4_2
+        - x2apic
+        - movbe
+        - popcnt
+        - tsc_deadline_timer
+        - aes
+        - xsave
+        - avx
+        - f16c
+        - rdrand
+        - hypervisor
+        - lahf_lm
+        - abm
+        - invpcid_single
+        - fsgsbase
+        - bmi1
+        - avx2
+        - smep
+        - bmi2
+        - erms
+        - invpcid
+        - xsaveopt
+    cpu_model:
+        Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz
+    cpuarch:
+        x86_64
+    devops.nifi.cluster.id:
+        1
+    disks:
+    dns:
+        ----------
+        domain:
+        ip4_nameservers:
+            - 10.120.20.10
+            - 10.123.20.10
+        ip6_nameservers:
+        nameservers:
+            - 10.120.20.10
+            - 10.123.20.10
+        options:
+        search:
+            - orgX.com
+            - ec2.internal
+        sortlist:
+    domain:
+        systemid.us-east-1a.test.mydomain.com
+    fqdn:
+        devops-nifi-03.systemid.us-east-1a.test.mydomain.com
+    fqdn_ip4:
+        - 10.123.20.250
+    fqdn_ip6:
+        - fe80::cf9:42ff:fe03:fa7a
+    gid:
+        0
+    gpus:
+    group.post.startup.orchestration:
+        - orch.devops.post-startup
+    group.pre.provision.orchestration:
+        - orch.devops.pre-provision
+    group.pre.startup.orchestration:
+        - orch.devops.pre-startup
+    groupname:
+        root
+    host:
+        devops-nifi-03
+    hwaddr_interfaces:
+        ----------
+        eth0:
+            0e:f9:42:03:fa:7a
+        lo:
+            00:00:00:00:00:00
+    id:
+        devops-nifi-03.SYSTEMID.us-east-1a.test.MYDOMAIN.com
+    init:
+        systemd
+    internal.role:
+        node
+    ip4_interfaces:
+        ----------
+        eth0:
+            - 10.123.20.250
+        lo:
+            - 127.0.0.1
+    ip6_interfaces:
+        ----------
+        eth0:
+            - fe80::cf9:42ff:fe03:fa7a
+        lo:
+            - ::1
+    ip_interfaces:
+        ----------
+        eth0:
+            - 10.123.20.250
+            - fe80::cf9:42ff:fe03:fa7a
+        lo:
+            - 127.0.0.1
+            - ::1
+    ipv4:
+        - 10.123.20.250
+        - 127.0.0.1
+    ipv6:
+        - ::1
+        - fe80::cf9:42ff:fe03:fa7a
+    kernel:
+        Linux
+    kernelrelease:
+        3.10.0-693.11.6.el7.x86_64
+    locale_info:
+        ----------
+        defaultencoding:
+            UTF-8
+        defaultlanguage:
+            en_US
+        detectedencoding:
+            UTF-8
+    localhost:
+        devops-nifi-03.systemid.us-east-1a.test.mydomain.com
+    lsb_distrib_codename:
+        CentOS Linux 7 (Core)
+    lsb_distrib_id:
+        CentOS Linux
+    machine_id:
+        609bbd29e32a4898e604f49bff82a88c
+    manufacturer:
+        Xen
+    master:
+        10.123.20.125
+    mdadm:
+    mem_total:
+        1837
+    node.index:
+        3
+    node_location:
+        us-east-1a
+    nodename:
+        ip-10-123-20-250.orgX.com
+    num_cpus:
+        1
+    num_gpus:
+        0
+    os:
+        CentOS
+    os_family:
+        RedHat
+    osarch:
+        x86_64
+    oscodename:
+        CentOS Linux 7 (Core)
+    osfinger:
+        CentOS Linux-7
+    osfullname:
+        CentOS Linux
+    osmajorrelease:
+        7
+    osrelease:
+        7.4.1708
+    osrelease_info:
+        - 7
+        - 4
+        - 1708
+    path:
+        /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/bin:/sbin
+    pid:
+        11078
+    pillar.environment:
+        test
+    product.group:
+        devops
+    productname:
+        HVM domU
+    ps:
+        ps -efHww
+    pythonexecutable:
+        /bin/python2
+    pythonpath:
+        - /usr/bin
+        - /usr/lib64/python27.zip
+        - /usr/lib64/python2.7
+        - /usr/lib64/python2.7/plat-linux2
+        - /usr/lib64/python2.7/lib-tk
+        - /usr/lib64/python2.7/lib-old
+        - /usr/lib64/python2.7/lib-dynload
+        - /usr/lib64/python2.7/site-packages
+        - /usr/lib/python2.7/site-packages
+    pythonversion:
+        - 2
+        - 7
+        - 5
+        - final
+        - 0
+    role:
+        devops.nifi
+    role.base:
+        nifi
+    role.id:
+        devops.nifi
+    role.post.startup.orchestration:
+        - orch.devops.post.nifi
+    role.pre.provision.orchestration:
+        - orch.devops.pre-prov.nifi
+    role.pre.startup.orchestration:
+        - orch.devops.pre.nifi
+    saltpath:
+        /usr/lib/python2.7/site-packages/salt
+    saltversion:
+        2017.7.5
+    saltversioninfo:
+        - 2017
+        - 7
+        - 5
+        - 0
+    selinux:
+        ----------
+        enabled:
+            True
+        enforced:
+            Enforcing
+    serialnumber:
+        ec2f6d9e-04a4-622f-62ab-80ea8d2e847f
+    server_id:
+        1013588356
+    shell:
+        /bin/sh
+    systemd:
+        ----------
+        features:
+            +PAM +AUDIT +SELINUX +IMA -APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ +LZ4 -SECCOMP +BLKID +ELFUTILS +KMOD +IDN
+        version:
+            219
+    uid:
+        0
+    username:
+        root
+    uuid:
+        ec2f6d9e-04a4-622f-62ab-80ea8d2e847f
+    virtual:
+        xen
+    virtual_subtype:
+        Xen PV DomU
+    zmqversion:
+        4.1.4

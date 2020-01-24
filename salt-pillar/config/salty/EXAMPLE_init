@@ -1,0 +1,176 @@
+#!yaml|gpg
+ 
+# *** THIS ARE HYPOTHETICAL CONFIG. IN THE ROLE CONFIG, YOU CAN CREATE ANY
+# CONFIG NEEDED. THIS PILLAR SECTION IS USED BY SALT STATES.
+
+# #########################################################################
+# CONFIGURATION OF **BASE** ROLES ASSOCIATED WITH OTHER
+# OTHER ROLE CONFIGS WOULD BE ADDED BELOW AS REQUIRED AS NEW OR EXTENDING 
+# EXAMPLE:
+# product-suite.role_name:
+#  all:
+#    - role1
+#    - role2
+#
+#   source-path: /orgX/some-repo
+#   product-name: foo
+#   product-version: 1.5.0
+#   package-name: foo_1.5.0
+#   mod-package-name: SomeOther.war
+#   package-type: war
+#   tomcat:
+#     instance: 1  *** can be INT or  LIST of INT [1,2,3]
+#     version: 8.0.0
+#     extended-properties: [these are additional properties to add in setenv.sh]
+#       testone: 1
+#       testtwo: 2
+#     property-override: [these override default values set in setenv.template]
+#       max-heap-size: 2048  [example values]
+#       memory-size: 128
+#       max-memory-size: 356
+#       spring-profile: uat
+#     extended-catalina-opts: [add additional catalina options in tomcat instance setenv.sh
+#       - "-Dsomevalue1=$FOO"
+#       - "-Dsomevalue2=$BAR"
+#   java:
+#     version: 1.7.0
+#     package: jdk-7u-linux-x64.tar.gz
+#   state: ['suite.product']
+#   security-group: public
+#   dependencies:
+#     product.role.deploy: X.X.X 
+#
+#
+# NOTE: if other.role:product-path is used, the role specific product-name,
+# product-version is used to construct the uri to get the artifact.
+# I.E.: /com/other/portal/2.0.0.1/portal-2.0.0.war
+#
+# IF THE ABOVE URI IS NOT ACCURATE TO THE LOCATION OF THE ARIFACT, USE
+# ROLE SPECIFIC product-path. I.E. other.role:portal-ui:product-path
+# WHERE THE VALUE WOULD BE SOMETHING LIKE:
+# /com/other/portal/UI-2.0.1.2/...
+#
+# STATE FILE SHOULD ALWAYS TRY THE ROLE SPECIFIC product-path	FIRST, THEN
+# USE THE other.role:product-path IF ROLE SPECIFIC NOT FOUND.
+# #########################################################################
+
+other.role:
+
+  product-path: /com/other/
+
+  # OPTIONAL - ENABLES RUNNING PRODUCT GROUP SPECIFIC POST SETUP ORCHESTRATE STATE
+  run-post-deploy: True
+  post-deploy-orchestration: orch.postdeploy.other
+
+  all: 
+    - portal-admin
+    - portal-ui
+    - portal-db
+    - foo-api
+    - bar-api
+    - dummy
+
+  portal-ui:
+    source-path: /orgX/release
+    product-path: /com/other/portal/1.0.1.2/
+    product-name: protal-ui
+    product-version: 1.0.1.2
+    package-name: portal-ui-1.0.1.2.war
+    mod-package-name: portal_ui.war
+    package-type: war
+    schema-package: some-file-name-portal.tar.gz
+    dependencies:
+      other.foo-api.deploy: 3.0.0.5
+      other.bar-api.deploy: 2.0.1.10
+    tomcat:
+      instance: [6,8]
+      version: 8.0.39
+      package: apache-tomcat-8.0.39.tar.gz
+      extended-properties:
+        TESTONE: 1
+        TESTTWO: 2
+      property-override:
+        max-heap-size: 2048 
+        memory-size: 128
+        max-memory-size: 356
+        spring-profile: uat
+      extended-catalina-opts:
+        - "-DorgX.other.configDir=$TOMCAT_CONFIG_HOME"
+        - "-DorgX.other.configDirTEST1=$TOMCAT_CONFIG_HOME"
+        - "-DorgX.other.configDirTEST2=$TOMCAT_CONFIG_HOME"
+    java:
+      version: 1.8.0_121
+      package: jdk-8u121-linux-x64.rpm
+    db:
+      user: portalui
+      password: |
+        -----BEGIN PGP MESSAGE-----
+        Version: GnuPG v2.0.22 (GNU/Linux)
+
+        CIPHER-GENERATED-ON-SALT-MASTER-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+        =XXXX
+        -----END PGP MESSAGE-----
+
+    state: ['other.portal-ui']
+    security-group: public
+    elbv2:
+      name: PORTALUIV2
+      interval: 10
+      timeout: 5
+      healthy_threshold: 2
+      unhealthy_threshold: 4
+      target: /health
+      forwarding_port: 80
+      scheme: internal
+
+
+  portal-db:
+    source-path: /orgX/release-schema
+    product-name: oracle
+    product-version: 11gR2
+    packages: ['package1', 'package2']
+    package-name: some-db-scripts.war
+    package-type: rpm
+    svc-name: 
+    state: ['other.portal-db']
+    security-group: private
+
+  foo-api:
+    source-path: /orgX/release
+    product-path: /com/other/foo-api/foo-2.2.2.2/
+    product-name: foo-api
+    product-version: 2.2.2.2
+    package-name: foo-api-2.2.2.2.war
+    mod-package-name: fooapi.war
+    package-type: war
+    tomcat:
+      instance: 8
+    java:
+      version: 1.8.0_121
+      package: jdk-8u121-linux-x64.rpm
+    state: ['other.foo-api']
+    security-group: public
+
+  bar-api:
+    source-path: /orgX/release
+    product-path: /com/other/bar-api/foo-2.2.2.2/
+    product-name: bar-api
+    product-version: 2.2.2.2
+    package-name: bar-api-2.2.2.2.war
+    mod-package-name: barapi.war
+    package-type: war
+    tomcat:
+      instance: 8
+    java:
+      version: 1.8.0_121
+      package: jdk-8u121-linux-x64.rpm
+    state: ['other.bar-api']
+    security-group: public
+
+  dummy:
+    security-group: public
+    state: ['common.dummy']

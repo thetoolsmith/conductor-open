@@ -1,0 +1,15 @@
+# #########################################################################
+# THIS IS A ROLLUP TO EXPOSE ALL APACHE PRODUCT DEFAULTS  TO STATE FILES 
+# WITH ONE INCLUDE ** ALL SUPPORTED VERSIONS NEED TO BE IN GLOBAL.SLS
+# #########################################################################
+{% import_yaml "common/apache/cassandra/defaults.yaml" as cassandra %}
+{% import_yaml "common/apache/nifi/defaults.yaml" as nifi %}
+{% import_yaml "common/apache/activemq/defaults.yaml" as activemq %}
+{% import_yaml "common/apache/zookeeper/defaults.yaml" as zookeeper %}
+{% import_yaml "common/apache/kafka/defaults.yaml" as kafka %}
+
+cassandra: {{cassandra}}
+nifi: {{nifi}}
+activemq: {{activemq}}
+zookeeper: {{zookeeper}}
+kafka: {{kafka}}

@@ -1,0 +1,4 @@
+# MIGHT NOT WANT THIS. INCLUDING users.all WOULND DO THE SAME AND MAY BE SAFER
+
+include:
+  - .all

@@ -1,0 +1,18 @@
+zookeeper manage commands
+
+sudo service zookeeper status
+sudo service zookeeper stop
+sudo service zookeeper start
+sudo service zookeeper restart
+
+zookeeper common state overwritable settings (pass in as pillar)
+
+version
+java-version
+dest-path (destination install directory)
+zoofile (template)
+user
+group
+
+
+

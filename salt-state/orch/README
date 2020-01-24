@@ -1,0 +1,5 @@
+Any location other than common here are for productgroup hooks
+
+/common is for common hooks 
+/common/utility is for general common product orchestrate states (called from product states, reactors or other cmdline)
+

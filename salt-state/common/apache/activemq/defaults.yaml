@@ -1,0 +1,7 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/activemq/version.yaml" as default %}
+
+activemq:
+  product-version: {{default['version']}}
+  product-name: activemq
+  srcpath: {{artifactory['repo-path']}}/com/apache/activemq/

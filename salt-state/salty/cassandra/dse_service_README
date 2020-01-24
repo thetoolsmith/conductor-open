@@ -1,0 +1,20 @@
+the service will not start until the keystore is created and certs are generated.
+
+error shown in /datalake/cassandra/logs/debug.log
+
+ERROR [main] 2019-01-24 14:41:13,822  DseModule.java:100 - {}. Exiting...
+com.google.inject.CreationException: Unable to create injector, see the following errors:
+
+1) An exception was caught and reported. Message: Failed to initialize SSLContext: Client encryption is enabled but the given keystore file /datalake/.polaris/aabddejj/cassandra.keystore.jks does not exist. Please configure client_encryption options properly in cassandra.yaml
+  at com.datastax.bdp.DseModule.configure(Unknown Source)
+
+1 error
+        at com.google.inject.internal.Errors.throwCreationExceptionIfErrorsExist(Errors.java:466)
+        at com.google.inject.internal.InternalInjectorCreator.initializeStatically(InternalInjectorCreator.java:155)
+        at com.google.inject.internal.InternalInjectorCreator.build(InternalInjectorCreator.java:107)
+        at com.google.inject.Guice.createInjector(Guice.java:96)
+        at com.google.inject.Guice.createInjector(Guice.java:73)
+        at com.google.inject.Guice.createInjector(Guice.java:62)
+        at com.datastax.bdp.ioc.DseInjector.get(DseInjector.java:36)
+        at com.datastax.bdp.DseModule.main(DseModule.java:94)
+Caused by: org.apache.cassandra.exceptions.ConfigurationException: Failed to initialize SSLContext: Client encryption is enabled but the given keystore file /datalake/.polaris/aabddejj/cassandra.keystore.jks does not exist. Please configure client_encryption options properly in cassandra.yaml

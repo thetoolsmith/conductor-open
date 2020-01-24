@@ -1,0 +1,21 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+{% import_yaml "common/apache/kafka/version.yaml" as default %}
+
+kafka:
+  product-version: {{default['version']}}
+  package: kafka_2.11-2.0.0.tgz
+  java-version: 1.8.0_101
+  product-name: kafka
+  service-name: kafka
+  server-properties:
+    listener: {{ salt['pillar.get']('salty.role:kafka:listener', 'PLAINTEXT') }}
+    listener-port: {{ salt['pillar.get']('salty.role:kafka:listener-port', '9099') }}
+    num-partitions: {{ salt['pillar.get']('salty.role:kafka:num-partitions', '10') }}
+    jmx-port: {{ salt['pillar.get']('salty.role:kafka:jmx-port', '4999') }}
+    log-dirs:
+      - /opt/logs1
+      - /opt/logs2
+  dest-path: /opt/apache
+  srcpath: {{artifactory['repo-path']}}/com/apache/kafka/
+  user: root
+  group: root

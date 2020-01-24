@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: conductor
+Version: 1.0
+Summary: Orchestration runner extension for saltstack
+Home-page: wiki.somepage.com
+Author: Paul Bruno
+Author-email: paul@acidhousetracks.com
+License: UNKNOWN
+Description: Custom orchestration provisioning runner module for Saltstack system 
+Platform: UNKNOWN
+Classifier: Programming Language :: Python 2.7

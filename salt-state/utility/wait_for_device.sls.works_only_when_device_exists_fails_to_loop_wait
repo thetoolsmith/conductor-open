@@ -1,0 +1,12 @@
+{% set device = salt['pillar.get']('device', None) %}
+{% if not device == None %}
+utility wait for device:
+  loop.until:
+    - name: disk.blkid
+    - condition: m_ret["{{device}}"]['TYPE'] == 'ext4'
+    - period: 5
+    - timeout: 20
+    - m_args:
+      - {{device}}
+    - m_kwargs: {}
+{% endif %}

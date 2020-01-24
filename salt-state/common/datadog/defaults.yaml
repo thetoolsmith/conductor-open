@@ -1,0 +1,9 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+
+datadog:
+  agent:
+    api-key: {{ salt['pillar.get']('config.common:datadog:agent:api-key', 'unspecified' ) }}
+  product-version: 
+  service-name: datadog-agent 
+  srcpath: {{artifactory['repo-path']}}/com/datadog/agent
+  dest-path: /opt/datadog

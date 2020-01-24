@@ -1,0 +1,9 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+# PILLAR WILL OVERRIDE THESE IF EXISTS
+test:
+  product-version: 3.3.3
+  product-name: test
+  other-config: some other config
+  srcpath: {{artifactory['repo-path']}}/com/apache/cassandra/
+
+

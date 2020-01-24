@@ -1,0 +1,11 @@
+fetching {{package}} for {{product}}:
+  cmd.run:
+    - output_loglevel: quiet
+    - cwd: {{ dest_path }}
+    - name: |
+        sudo yum -y update
+        echo getting package https://archive.apache.org/dist/zookeeper/zookeeper-{{version}}/{{package}}
+        wget https://archive.apache.org/dist/zookeeper/zookeeper-{{version}}/{{package}}
+        tar zxf {{package}} -C {{ dest_path }}
+        rm -rf {{package}}
+

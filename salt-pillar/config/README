@@ -1,0 +1,33 @@
+The /config/PRODUCTGROUP slice of this repo is for role base salt states. Or any state that a product group decides to implement.
+Role states are state that install/config instance to be of a certain 'role". A role is mapped to a product in most cases.
+So product group A deploys an internal build application called foo. There should be a role state such as salt://groupA/foo/init.sls.
+This state could also include many othere states.
+
+When deleloping role states, its good practice to think about the use cases. If it takes 5 steps to install and configure a product,
+and 2 of those steps are tasks that may need to be run on existing machine for operational purposes, it's best to create a separate
+state for each of those tasks and include them in the role state for appliying to new instances.
+
+If a product group state is an "implementation" of a common or shared state, such as common.apache.zookeeper, that role state can be 
+very simply and should only have product group specific use case additional actions plus the main include of the common state with
+overridable parameters. 
+
+All role states that implement common states should have an overrides.yaml if anything needs to override the common state default. This
+is on a per salt environment basis (not pillar environments that map to the business such as dev vs. qa vs prod etc...). 
+The salt environment refers to the branch of the salt state tree. For most all cases this will be "release" for all pillar environments. 
+This is not needed in any you need to test new salt states. 
+The the saltenv=xxxx arguments needs to be passed into the provisioning conductor tool.
+
+For implementations of shared common states, please refer to the common state to learn what pillar parameters can be passed in as overrides.
+
+In addition to the salt environment defaults for product group states, pillar can be used to override those values on a per pillar environment
+basis. Pillar environment maps to the business environments such as dev, qa, prod etc.... and are segmented into separate branches in the 
+salt-pillar github repo.
+
+This explains the value override precedence that is available in the Salt conductor model:
+
+dynamic pillar runtime values, can override
+  -> product group pillar environment defaults, can override
+    -> product group state salt environment defaults, can override
+      -> common pillar environment defaults, can override
+        -> common state salt environment defaults (THIS IS THE TRUE DEFAULT)
+

@@ -1,0 +1,6 @@
+Events that can be triggered by minions.
+
+Each state file here represents an event that can be fired off by minion.
+The events must be configured on the salt master reaction config.
+
+This directory is for local state events. Use /orch for runner state events

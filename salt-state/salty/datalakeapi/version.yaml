@@ -1,0 +1,1 @@
+version: {{ salt['pillar.get']('salty.role:datalakeapi:version', '3.0.3-SNAPSHOT') }}

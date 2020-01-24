@@ -1,0 +1,7 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+# PILLAR WILL OVERRIDE THESE IF EXISTS
+test-overrides:
+  product-version: 2.2.2
+  product-name: test-overrides
+  srcpath: {{artifactory['repo-path']}}/nothing/
+

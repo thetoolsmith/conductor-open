@@ -1,0 +1,8 @@
+{  
+   "salty.activemq":{  
+      "version":"5.15.5"
+   },
+   "salty.dummy":{  
+      "version":"2.2.2"
+   }
+}

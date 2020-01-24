@@ -1,0 +1,3 @@
+these files are templated for password only for now.
+we could put all these configuration in pillar and templatize the entire file.
+

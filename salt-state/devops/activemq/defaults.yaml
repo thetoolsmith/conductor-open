@@ -1,0 +1,9 @@
+{% import_yaml "common/artifactory.yaml" as artifactory %}
+# NEEDED ONLY IF WE ARE STORING OUR OWN LOCATION OF ACTIVEMQ BINARY
+activemq:
+  product-version: 5.15.5
+  product-name: activemq
+  service-name: activemq
+  srcpath: {{artifactory['repo-path']}}/com/apache/activemq/
+
+

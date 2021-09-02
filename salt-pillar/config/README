@@ -1,4 +1,6 @@
 The /config/PRODUCTGROUP slice of this repo is for role base salt states. Or any state that a product group decides to implement.
+NOTE: in this framework, 'salty' and 'devops' were used as product groups. But in real practice, whatever the organization, the product groups would be defined. 
+A product group is simply a logical configuration that maps to the organizations groups/teams supporting specific "products" within the organization etc....
 Role states are state that install/config instance to be of a certain 'role". A role is mapped to a product in most cases.
 So product group A deploys an internal build application called foo. There should be a role state such as salt://groupA/foo/init.sls.
 This state could also include many othere states.

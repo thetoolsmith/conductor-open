@@ -1,2 +1,2 @@
 # conductor-open
-# needs attention
+A generic enterprise level design for implementing Saltstack
